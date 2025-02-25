@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UEG - Desenvolvimento Web 2025: Alunos</title>
+  </head>
+  <body>
+    <h1>Lista de Alunos</h1>
+    <table>
+      <tr th:each="aluno, iter: ${alunos}">
+        <td th:text="${aluno.nome}">Fulano de Tal</td>
+        <td th:text="${aluno.email}">fulano@ueg.br</td>
+        <td>
+          <ul>
+            <li>
+              <a
+                th:href="@{'/alunos/editar/'+${iter.index}}"
+                href="aluno-update"
+                >Editar</a
+              >
+            </li>
+            <li>
+              <a
+                th:href="@{'/alunos/excluir/'+${iter.index}}"
+                href="aluno-delete"
+                >Excluir</a
+              >
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+    <button><a href="aluno-create">Criar aluno</a></button>
+    <h3><a href="index.html">home</a></h3>
+  </body>
+</html>
