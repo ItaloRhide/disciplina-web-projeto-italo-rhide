@@ -6,16 +6,13 @@
     <title>UEG - Desenvolvimento Web 2025: Aluno</title>
   </head>
   <body>
-    <h1>Atualização Cadastro de Aluno</h1>
-    <form action="">
-      <label>Nome:</label><br>
-      <input type="text" name="nome" /><br>
-      <label>Matríula:</label><br>
-      <input type="text" name="matrícula" /><br>
-      <label for="email">E-mail:</label><br>
-      <input type="text" name="email"><br><br>
-      <button type="submit">Atualizar aluno</button>
-    </form>
-    <H3><a href="index">home</a></H3>
+    <form action="/alunos/update" method="post">
+      <input type="hidden" name="id" th:value="${id}">
+      <label>Nome: </label>
+      <input type="text" name="nome" th:value="${aluno.nome}">
+      <label>Email</label>
+      <input type="text" name="email" th:value="${aluno.email}">
+      <button class="waves-effect waves-light btn">Salvar</button>
+      </form>
   </body>
 </html>

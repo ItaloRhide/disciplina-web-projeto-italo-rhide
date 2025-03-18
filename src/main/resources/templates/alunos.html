@@ -7,31 +7,31 @@
   </head>
   <body>
     <h1>Lista de Alunos</h1>
-    <table>
+    <ul>
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/alunos">Alunos</a></li>
+      <li><a href="/alunos/create">Novo Aluno</a></li>
+    </ul>
+    <table class="table">
+      <tr>
+        <th>Nome</th>
+        <th>Matrícula</th>
+        <th>Ações</th>
+      </tr>
       <tr th:each="aluno, iter: ${alunos}">
-        <td th:text="${aluno.nome}">Fulano de Tal</td>
-        <td th:text="${aluno.email}">fulano@ueg.br</td>
+        <td th:text="${aluno.nome}"></td>
+        <td th:text="${aluno.email}"></td>
         <td>
           <ul>
             <li>
-              <a
-                th:href="@{'/alunos/editar/'+${iter.index}}"
-                href="aluno-update"
-                >Editar</a
-              >
+              <a th:href="@{'/alunos/update/' + ${iter.index}}">Atualizar</a>
             </li>
             <li>
-              <a
-                th:href="@{'/alunos/excluir/'+${iter.index}}"
-                href="aluno-delete"
-                >Excluir</a
-              >
+              <a th:href="@{'/alunos/delete/' + ${iter.index}}">Excluir</a>
             </li>
           </ul>
         </td>
       </tr>
     </table>
-    <button><a href="aluno-create">Criar aluno</a></button>
-    <h3><a href="index.html">home</a></h3>
   </body>
 </html>
