@@ -3,35 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
     <title>UEG - Desenvolvimento Web 2025: Alunos</title>
   </head>
   <body>
-    <h1>Lista de Alunos</h1>
-    <ul>
-      <li><a href="/">Inicio</a></li>
-      <li><a href="/alunos">Alunos</a></li>
-      <li><a href="/alunos/create">Novo Aluno</a></li>
-    </ul>
-    <table class="table">
-      <tr>
-        <th>Nome</th>
-        <th>Matrícula</th>
-        <th>Ações</th>
-      </tr>
-      <tr th:each="aluno, iter: ${alunos}">
-        <td th:text="${aluno.nome}"></td>
-        <td th:text="${aluno.email}"></td>
-        <td>
-          <ul>
-            <li>
-              <a th:href="@{'/alunos/update/' + ${iter.index}}">Atualizar</a>
-            </li>
-            <li>
-              <a th:href="@{'/alunos/delete/' + ${iter.index}}">Excluir</a>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    </table>
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="" class="brand-logo">Logo</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">UEG - PROJETO WEB</a></li>
+        </ul>
+        <ul id="nav-mobile" class="sidenav">
+          <li><a href="#">UEG - PROJETO WEB</a></li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"
+          ><i class="material-icons">menu</i></a
+        >
+      </div>
+    </nav>
+
+    <h1 class="center light-blue-text">Lista de Alunos</h1>
+    <div class="center">
+      <a href="/" class="waves-effect waves-light btn">Inicio</a>
+      <a href="/alunos" class="waves-effect waves-light btn">Alunos</a>
+      <a href="/alunos/create" class="waves-effect waves-light btn">Novo Aluno</a>
+    </div>
+
+    <div class="responsive-table">
+      <table class="centered">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Matrícula</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="aluno, iter: ${alunos}">
+            <td th:text="${aluno.nome}"></td>
+            <td th:text="${aluno.email}"></td>
+            <td>
+              <ul>
+                <li>
+                  <a th:href="@{'/alunos/update/' + ${iter.index}}" class="waves-effect waves-light btn">Atualizar</a>
+                </li>
+                <br>
+                <li>
+                  <a th:href="@{'/alunos/delete/' + ${iter.index}}" class="waves-effect waves-light btn">Excluir</a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>
