@@ -3,18 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
     <title>UEG - Desenvolvimento Web 2025: Aluno</title>
   </head>
   <body>
-    <h1>Cadastro de Aluno</h1>
-    <form action="/alunos/delete" method="post">
-      <input type="hidden" name="id" th:value="${id}" />
-      <label>Nome: </label>
-      <input type="text" name="nome" th:value="${aluno.nome}" disabled />
-      <label>Email</label>
-      <input type="text" name="email" th:value="${aluno.email}" disabled />
-      <button>Excluir</button>
-    </form>
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="" class="brand-logo">Logo</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">UEG - PROJETO WEB</a></li>
+        </ul>
+        <ul id="nav-mobile" class="sidenav">
+          <li><a href="#">UEG - PROJETO WEB</a></li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"
+          ><i class="material-icons">menu</i></a
+        >
+      </div>
+    </nav>
+
+    <h1 class="center light-blue-text">Cadastro de Aluno</h1>
+
+    <div class="center">
+      <form action="/alunos/delete" method="post">
+        <input type="hidden" name="id" th:value="${id}" />
+        <label>Nome: </label>
+        <input type="text" name="nome" th:value="${aluno.nome}" disabled />
+        <label>Email</label>
+        <input type="text" name="email" th:value="${aluno.email}" disabled />
+        <button class="center waves-effect waves-light btn">Excluir</button>
+      </form>
+    </div>
   </body>
   <script>
     <!--window.alert("DESEJA REALMENTE APAGAR ALUNO?")-->
