@@ -1,40 +1,53 @@
 package br.ueg.desenvolvimento.web.projeto_italo_rhide.controller;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AlunoController {
 
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
-
     static List alunos = new ArrayList<>();
+
+    @Autowired
+    private AlunoRepository alunoRepository;
+
     static {
         alunos.add(Map.of("nome", "João", "email", "joao@localhost"));
         alunos.add(Map.of("nome", "Maria", "email", "maria@localhost"));
-        alunos.add(Map.of("nome", "José", "email", "jose@localhost"));
     }
 
     @GetMapping("/alunos")
     public String getHome(Model model) {
-        model.addAttribute("alunos", alunos);
-        return "alunos";
+        List alunosBd = alunoRepository.findAll();
+        model.addAttribute("alunos", alunosBd);
+        // model.addAttribute("alunos", alunos);
+        model.addAttribute("mensagem", "Todos os alunos cadastrados");
+        return "alunos.html";
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "index.html";
     }
 
     @GetMapping("/alunos/create")
     public String getCreate() {
-        return "aluno-create";
+        return "aluno-create.html";
     }
 
     @PostMapping("/alunos/create")
     public String postCreate(@RequestParam String nome, @RequestParam String email) {
-        alunos.add(Map.of("nome", nome, "email", email));
-
+        Aluno aluno = new Aluno(nome, email);
+        alunoRepository.save(aluno);
         return "redirect:/alunos";
     }
 
@@ -42,7 +55,7 @@ public class AlunoController {
     public String getUpdate(@PathVariable int id, Model model) {
         model.addAttribute("aluno", alunos.get(id));
         model.addAttribute("id", id);
-        return "aluno-update";
+        return "aluno-update.html";
     }
 
     @PostMapping("/alunos/update")
@@ -55,7 +68,7 @@ public class AlunoController {
     public String getDelete(@PathVariable int id, Model model) {
         model.addAttribute("aluno", alunos.get(id));
         model.addAttribute("id", id);
-        return "aluno-delete";
+        return "aluno-delete.html";
     }
 
     @PostMapping("/alunos/delete")
