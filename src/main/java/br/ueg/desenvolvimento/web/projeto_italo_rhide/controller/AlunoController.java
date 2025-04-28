@@ -53,27 +53,42 @@ public class AlunoController {
 
     @GetMapping("/alunos/update/{id}")
     public String getUpdate(@PathVariable int id, Model model) {
-        model.addAttribute("aluno", alunos.get(id));
+        // model.addAttribute("aluno", alunos.get(id));
+        model.addAttribute("aluno", alunoRepository.findById(id).get());
         model.addAttribute("id", id);
         return "aluno-update.html";
     }
 
     @PostMapping("/alunos/update")
     public String postUpdate(@RequestParam int id, @RequestParam String nome, @RequestParam String email) {
-        alunos.set(id, Map.of("nome", nome, "email", email));
+        // alunos.set(id, Map.of("nome", nome, "email", email));
+        Aluno aluno = alunoRepository.findById(id).get();
+        aluno.setNome(nome);
+        aluno.setEmail(email);
+        alunoRepository.save(aluno);
         return "redirect:/alunos";
     }
 
     @GetMapping("/alunos/delete/{id}")
     public String getDelete(@PathVariable int id, Model model) {
-        model.addAttribute("aluno", alunos.get(id));
+        // model.addAttribute("aluno", alunos.get(id));
+        Aluno alunodb = alunoRepository.findById(id).get();
+        model.addAttribute("aluno", alunodb);
         model.addAttribute("id", id);
         return "aluno-delete.html";
     }
 
     @PostMapping("/alunos/delete")
     public String postDelete(@RequestParam int id) {
-        alunos.remove(id);
+        // alunos.remove(id);
+        alunoRepository.deleteById(id);
         return "redirect:/alunos";
+    }
+
+    @GetMapping("/alunos/busca")
+    public String getBusca(@RequestParam String nome, Model model) {
+        // model.addAttribute("alunos", alunos);
+        model.addAttribute("alunos", alunoRepository.findByNomeContainingIgnoreCase(nome));
+        return "alunos.html";
     }
 }

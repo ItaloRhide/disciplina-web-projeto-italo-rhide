@@ -30,33 +30,45 @@
       <a href="/alunos/create" class="waves-effect waves-light btn">Novo Aluno</a>
     </div>
 
-    <div class="responsive-table">
-      <table class="centered">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Matrícula</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="aluno, iter: ${alunos}">
-            <td th:text="${aluno.nome}"></td>
-            <td th:text="${aluno.email}"></td>
-            <td>
-              <ul>
-                <li>
-                  <a th:href="@{'/alunos/update/' + ${iter.index}}" class="waves-effect waves-light btn">Atualizar</a>
-                </li>
-                <br>
-                <li>
-                  <a th:href="@{'/alunos/delete/' + ${iter.index}}" class="waves-effect waves-light btn">Excluir</a>
-                </li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="container">
+      <div class="section">
+          <br >
+          <form action="/alunos/busca" method="get">
+            <label>Nome para busca:</label>
+            <input type="text" name="nome">
+            <button class="waves-effect waves-light btn-small">Busca</button>
+        </form>
+
+          <br >
+
+          <table class="table">
+              <tr>
+                  <th>Nome</th>
+                  <th>Matrícula</th>
+                  <th>Ações</th>
+              </tr>
+
+              <tr th:each="aluno, iter: ${alunos}">
+                  <td th:text="${aluno.nome}">
+
+                  </td>
+                  <td th:text="${aluno.email}">
+
+                  </td>
+                  <td>
+                      <ul>
+                          <li>
+                              <a  class="waves-effect waves-light btn-small" th:href="@{'/alunos/update/' + ${aluno.id}}">Atualizar</a>
+                          </li>
+                          <li>
+                              <a  class="waves-effect waves-light btn-small red" th:href="@{'/alunos/delete/' + ${aluno.id}}">Excluir</a>
+                          </li>
+                      </ul>
+                  </td>
+              </tr>
+          </table>
+
+      </div>
+  </div>
   </body>
 </html>
