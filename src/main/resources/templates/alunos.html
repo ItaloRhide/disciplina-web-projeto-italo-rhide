@@ -30,14 +30,15 @@
       <a href="/alunos/create" class="waves-effect waves-light btn">Novo Aluno</a>
     </div>
 
-    <div class="container">
+  <div class="container">
       <div class="section">
+
           <br >
           <form action="/alunos/busca" method="get">
-            <label>Nome para busca:</label>
-            <input type="text" name="nome">
-            <button class="waves-effect waves-light btn-small">Busca</button>
-        </form>
+              <label>Nome para busca:</label>
+              <input type="text" name="nome">
+              <button class="waves-effect waves-light btn-small">Busca</button>
+          </form>
 
           <br >
 
@@ -57,6 +58,10 @@
                   </td>
                   <td>
                       <ul>
+                          <li>
+                              <a class="waves-effect waves-light btn-small blue"
+                              th:href="@{'/alunos/update/telefone/' + ${aluno.id}}">Telefones</a>
+                          </li>
                           <li>
                               <a  class="waves-effect waves-light btn-small" th:href="@{'/alunos/update/' + ${aluno.id}}">Atualizar</a>
                           </li>
